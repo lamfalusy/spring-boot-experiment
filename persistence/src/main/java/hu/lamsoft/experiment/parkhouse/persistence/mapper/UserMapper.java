@@ -18,10 +18,10 @@ public interface UserMapper {
 	@Select("SELECT * FROM user")
     public List<User> getAllUsers();
 
-	@Insert("INSERT into user(firstname,lastname,email) VALUES(#{firstName}, #{lastName}, #{email})")
+	@Insert("INSERT into user(username,email) VALUES(#{userName}, #{email})")
     public int insertUser(User user);
 
-	@Update("UPDATE user SET firstname=#{firstName}, lastname=#{lastName}, email=#{email} WHERE id=#{id}")
+	@Update("UPDATE user SET username=#{userName}, email=#{email} WHERE id=#{id}")
     public int updateUser(User user);
 	
 }

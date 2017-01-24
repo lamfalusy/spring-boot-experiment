@@ -19,39 +19,34 @@ public class UserController {
 	
 	@RequestMapping(path = "/user", method = RequestMethod.GET)
 	public User getUser(@RequestParam(value = "id", required = true) Long id) {
-		return userService.getUser(id);
+		return userService.findById(id);
 	}
 	
 	@RequestMapping(path = "/users", method = RequestMethod.GET)
 	public List<User> getUsers() {
-		return userService.getUsers();
+		return userService.findAll();
 	}
 	
 	@RequestMapping(path = "/user", method = RequestMethod.POST)
-	public User createUser(@RequestParam(value = "firstName", required = true) String firstName,
-			@RequestParam(value = "lastName", required = true) String lastName,
+	public User createUser(@RequestParam(value = "userName", required = true) String userName,
 			@RequestParam(value = "email", required = true) String email) {
-		User user = new User(null, firstName, lastName, email);
-		userService.createUser(user);
+		User user = User.builder().userName(userName).email(email).build();
+		userService.create(user);
 		return user;
 	}
 	
 	@RequestMapping(path = "/user", method = RequestMethod.PUT)
 	public User updateUser(@RequestParam(value = "id", required = true) Long id,
-			@RequestParam(value = "firstName", required = false) String firstName,
-			@RequestParam(value = "lastName", required = false) String lastName,
+			@RequestParam(value = "userName", required = false) String userName,
 			@RequestParam(value = "email", required = false) String email) {
-		User user = userService.getUser(id);
-		if(firstName != null) {
-			user.setFirstName(firstName);
-		}
-		if(lastName != null) {
-			user.setLastName(lastName);
+		User user = userService.findById(id);
+		if(userName != null) {
+			user.setUserName(userName);
 		}
 		if(email != null) {
 			user.setEmail(email);
 		}
-		userService.updateUser(user);
+		userService.update(user);
 		return user;
 	}
 	
