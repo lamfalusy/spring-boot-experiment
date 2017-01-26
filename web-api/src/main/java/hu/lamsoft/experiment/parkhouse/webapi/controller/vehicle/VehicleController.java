@@ -19,7 +19,7 @@ public class VehicleController {
 	@Autowired
 	private VehicleService vehicleService;
 	
-	@RequestMapping(path = "/vehicle", method = RequestMethod.GET)
+	@RequestMapping(path = "/vehicles", method = RequestMethod.GET)
 	public List<Vehicle> getVehicles() {
 		return vehicleService.findAll();
 	}
